@@ -6,7 +6,9 @@ function App() {
 
   return (
     <>
-      <h1>Exo Meteo</h1>
+      <header>
+        <h1>Application Meteo</h1>
+      </header>
       <WeatherDisplay />
     </>
   )

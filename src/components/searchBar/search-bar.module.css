@@ -29,3 +29,9 @@
     margin-bottom: 2em;
     margin-top: 2em;
 }
+
+@media only screen and (max-width: 747px) {
+    .search-bar {
+        flex-direction: column;
+    }
+}

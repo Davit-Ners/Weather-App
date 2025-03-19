@@ -42,20 +42,22 @@ export default function WeatherDisplay() {
         setDesc(desc);
         setCity(city);
         setIconLink(iconLink);
-        setLastId(id => id + 1);
-        const id = lastId + 1;
         const flagLink = `https://flagsapi.com/${code}/shiny/64.png`;
         setCodeLink(flagLink);
-
-        setHistory(tab => [{ id, temp, desc, city, iconLink, flagLink }, ...tab]);
     };
+
+    const onFavoritClick = () => {
+        console.log(codeLink);
+        setLastId(id => id + 1);
+        setHistory(tab => [{ id: lastId + 1, temp, desc, city, iconLink, codeLink }, ...tab]);
+    }
 
     const handleLocation = (temp, desc, name) => {
         setOwnCity({ temp, desc, name });
     };
     
     return (
-        <div className="weather-container">
+        <div className={style['weather-container']}> 
             <div>
                 <WeatherRequester lat={location.latitude} lon={location.longitude} setOwnData={handleLocation}/>
                 {ownCity.name && <p>{ownCity.name}, il fait actuellement {ownCity.temp}° chez vous</p>}
@@ -67,7 +69,8 @@ export default function WeatherDisplay() {
              <div className={style['response']}>
                 <img src={codeLink} alt="" />
                 <p>Il fait {temp}° à {city}.</p>
-                <p>Description : {desc}</p> 
+                <p>Description : {desc}</p>
+                <button onClick={onFavoritClick}>Ajouter aux favoris</button> 
             </div>}
 
             <hr />
