@@ -9,19 +9,21 @@ export default function WeatherDisplay() {
     const [ city, setCity ] = useState('');
     const [ desc, setDesc ] = useState('');
     const [ history, setHistory ] = useState([]);
+    const [ iconLink, setIconLink ] = useState('');
 
     const [ isLoading, setLoading ] = useState(false);
     const [ onError, setError ] = useState(false);
     const [ lastId, setLastId ] = useState(0);
 
-    const setResponse = (temp, desc, city) => {
+    const setResponse = (temp, desc, city, iconLink) => {
         setTemp(temp);
         setDesc(desc);
         setCity(city);
+        setIconLink(iconLink);
         setLastId(id => id + 1);
         const id = lastId + 1;
 
-        setHistory(tab => [{ id, temp, desc, city }, ...tab]);
+        setHistory(tab => [{ id, temp, desc, city, iconLink }, ...tab]);
     };
     
     return (

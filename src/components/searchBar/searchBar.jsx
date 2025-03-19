@@ -12,6 +12,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
     const [ temp, setTemp ] = useState('');
     const [ desc, setDesc ] = useState('');
     const [ cityName, setCityName ] = useState('');
+    const [ iconLink, setIconLink ] = useState('');
 
     const getLatLonCity = (lat, lon, city) => {
         setLat(lat);
@@ -19,9 +20,10 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
         setCityName(city);
     };
 
-    const setData = (temp, desc) => {
+    const setData = (temp, desc, iconLink) => {
         setTemp(temp);
         setDesc(desc);
+        setIconLink(iconLink);
     };
 
     const handleSearch = () => {
@@ -37,7 +39,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
 
     useEffect(() => {
         if (cityName && temp) {
-            setResponse(temp, desc, cityName);
+            setResponse(temp, desc, cityName, iconLink);
         }
     }, [cityName, desc, temp]);
     

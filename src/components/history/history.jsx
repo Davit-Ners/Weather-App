@@ -3,6 +3,9 @@ import style from './history.module.css';
 
 export default function History({ history = {} }) {
     return (
-        <p className={style['list-elem']}>{history.city}, {history.temp} : {history.desc}</p>
+        <div className={style['list-elem']}>
+            <p>{history.city}, {history.temp} : {history.desc}</p>
+            <img src={history.iconLink} alt="Icon de la meteo" />
+        </div>
     );
 };

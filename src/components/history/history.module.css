@@ -1,3 +1,10 @@
 .list-elem {
     padding: 0.5em;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+
+    img {
+        width: 50px;
+    }
 }

@@ -25,9 +25,11 @@ export default function WeatherRequester({ lat, lon, setData = () => {}, setErro
 
                 const temp = Math.round(response.data.main.temp - 273.15);
                 const desc = response.data.weather[0].description;
+                const icon = response.data.weather[0].icon;
+                const iconLink = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
                 setLoading(false);
-                setData(temp, desc);
+                setData(temp, desc, iconLink);
                 
             } catch (e) {
                 if (ignore) return;
