@@ -24,6 +24,7 @@ export default function WeatherDisplay() {
         setLastId(id => id + 1);
         const id = lastId + 1;
         const flagLink = `https://flagsapi.com/${code}/shiny/64.png`;
+        setCodeLink(flagLink);
 
         setHistory(tab => [{ id, temp, desc, city, iconLink, flagLink }, ...tab]);
     };
@@ -34,10 +35,11 @@ export default function WeatherDisplay() {
             {isLoading ? <p>Chargement</p> : 
              onError ? <p>Erreur</p> : 
              city && 
-             <>
+             <div className={style['response']}>
+                <img src={codeLink} alt="" />
                 <p>Il fait {temp}° à {city}.</p>
-                <p>Description : {desc}</p>
-             </>}
+                <p>Description : {desc}</p> 
+            </div>}
 
             <hr />
             <div className={style['history']}>
