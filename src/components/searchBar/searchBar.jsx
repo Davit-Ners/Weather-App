@@ -37,6 +37,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
         setCityName('');
         setError(false);
         setSearch(city);
+        setCity('');
     };
 
     useEffect(() => {
