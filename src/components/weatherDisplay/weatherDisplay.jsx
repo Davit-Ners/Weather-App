@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SearchBar from "../searchBar/searchBar.jsx";
 import History from "../history/history.jsx";
+import style from './weather.module.css';
 
 export default function WeatherDisplay() {
 
@@ -35,8 +36,10 @@ export default function WeatherDisplay() {
              </>}
 
             <hr />
-            <h2>Historique</h2>
-            {history.length > 0 ? history.map(elem => <History history={elem} key={elem.id}/>) : <p>Vous n'avez pas encore d'historique</p>}
+            <div className={style['history']}>
+                <h2>Historique</h2>
+                {history.length > 0 ? history.map(elem => <History history={elem} key={elem.id}/>) : <p>Vous n'avez pas encore d'historique</p>}
+            </div>
         </div>
     );
 };

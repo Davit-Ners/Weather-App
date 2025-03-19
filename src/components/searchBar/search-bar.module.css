@@ -1,0 +1,31 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 1em;
+
+    background-color: #5decf7;
+
+    input {
+        height: 35px;
+        border-radius: 7px;
+        padding: 0.5em;
+    }
+
+    button {
+        font-size: 15px;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            background-color: #2b2ed8;
+            color: snow;
+            transform: rotateX(360deg);
+        }
+    }
+
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
