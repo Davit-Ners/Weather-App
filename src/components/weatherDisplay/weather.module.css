@@ -4,3 +4,12 @@
     gap: 1em;
     padding: 1em;
 }
+
+.response {
+    display: flex;
+    flex-direction: column;
+
+    img {
+        width: 50px;
+    }
+}

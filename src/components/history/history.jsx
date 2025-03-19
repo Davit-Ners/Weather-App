@@ -6,7 +6,7 @@ export default function History({ history = {} }) {
         <div className={style['list-elem']}>
             <p>{history.city}, {history.temp} : {history.desc}</p>
             <img src={history.iconLink} alt="Icon de la meteo" />
-            <img src={history.flagLink} alt="Icon de la meteo" />
+            <img src={history.flagLink} alt="Drapeau" />
         </div>
     );
 };
