@@ -10,13 +10,15 @@ export default function SearchBar() {
     const [ lon, setLon ] = useState('');
     const [ temp, setTemp ] = useState('');
     const [ desc, setDesc ] = useState('');
+    const [ cityName, setCityName ] = useState('');
 
     const [ isLoading, setLoading ] = useState(false);
     const [ onError, setError ] = useState(false);
 
-    const getLatLon = (lat, lon) => {
+    const getLatLonCity = (lat, lon, city) => {
         setLat(lat);
         setLon(lon);
+        setCityName(city);
     }
 
     const setData = (temp, desc) => {
@@ -24,13 +26,13 @@ export default function SearchBar() {
         setDesc(desc);
     }
 
-    console.log(temp, desc);
+    console.log(temp, desc, cityName, lat, lon);
     
     return (
         <div className="search-bar">
             <input type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
             <button onClick={() => setSearch(city)}>Rechercher</button>
-            <CityRequester city={search} getLatLon={getLatLon} setError={setError}/>
+            <CityRequester city={search} getLatLonCity={getLatLonCity} setError={setError}/>
             <WeatherRequester lat={lat} lon={lon} setError={setError} setData={setData}/>
         </div>
     );

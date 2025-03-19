@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function CityRequester({ city, getLatLon = (lat, lon) => {}, setError = () => {} }) {
+export default function CityRequester({ city, getLatLonCity = () => {}, setError = () => {} }) {
     const API_KEY = '8a65652400c8de0cba8e6afc7f6d2d3b';
-    
+
     useEffect(() => {
         if (!city) return;
         let ignore = false;
@@ -19,7 +19,7 @@ export default function CityRequester({ city, getLatLon = (lat, lon) => {}, setE
 
                 if (ignore) return;
                 
-                getLatLon(response.data[0].lat, response.data[0].lon);
+                getLatLonCity(response.data[0].lat, response.data[0].lon, response.data[0].local_names.fr);
             } catch (e) {
                 if (ignore) return;
                 setError(true);

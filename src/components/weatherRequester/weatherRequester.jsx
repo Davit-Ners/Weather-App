@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function WeatherRequester({ lat, lon, setData = (temp, desc) => {}, setError = () => {} }) {
+export default function WeatherRequester({ lat, lon, setData = () => {}, setError = () => {} }) {
     const API_KEY = '8a65652400c8de0cba8e6afc7f6d2d3b';
     const LINK = 'https://api.openweathermap.org/data/2.5/weather';
 
@@ -15,6 +15,7 @@ export default function WeatherRequester({ lat, lon, setData = (temp, desc) => {
                     params: {
                         lat: lat,
                         lon: lon,
+                        lang: 'fr',
                         appid: API_KEY
                     }
                 });
