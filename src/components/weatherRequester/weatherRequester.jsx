@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function WeatherRequester({ lat, lon, setData = () => {}, setError = () => {}, setLoading = () => {} }) {
+export default function WeatherRequester({ lat, lon, setData = () => {}, setError = () => {}, setLoading = () => {}, setOwnData = () => {} }) {
     const API_KEY = '8a65652400c8de0cba8e6afc7f6d2d3b';
     const LINK = 'https://api.openweathermap.org/data/2.5/weather';
 
@@ -26,10 +26,12 @@ export default function WeatherRequester({ lat, lon, setData = () => {}, setErro
                 const temp = Math.round(response.data.main.temp - 273.15);
                 const desc = response.data.weather[0].description;
                 const icon = response.data.weather[0].icon;
+                const name = response.data.name;
                 const iconLink = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
                 setLoading(false);
                 setData(temp, desc, iconLink);
+                setOwnData(temp, desc, name);
                 
             } catch (e) {
                 if (ignore) return;

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../searchBar/searchBar.jsx";
 import History from "../history/history.jsx";
 import style from './weather.module.css';
+import WeatherRequester from "../weatherRequester/weatherRequester.jsx";
 
 export default function WeatherDisplay() {
 
@@ -11,10 +12,30 @@ export default function WeatherDisplay() {
     const [ history, setHistory ] = useState([]);
     const [ iconLink, setIconLink ] = useState('');
     const [ codeLink, setCodeLink ] = useState('');
+    const [location, setLocation] = useState({ latitude: null, longitude: null });
 
     const [ isLoading, setLoading ] = useState(false);
     const [ onError, setError ] = useState(false);
     const [ lastId, setLastId ] = useState(0);
+    const [ ownCity, setOwnCity ] = useState({});
+
+    useEffect(() => {
+        const getLocation = () => {
+            navigator.geolocation.getCurrentPosition(
+              (p) => {
+                setLocation({
+                  latitude: p.coords.latitude,
+                  longitude: p.coords.longitude,
+                });
+              },
+              (err) => {
+                console.log(err.message);
+              }
+            );
+        };
+
+          getLocation();
+    }, []);
 
     const setResponse = (temp, desc, city, iconLink, code) => {
         setTemp(temp);
@@ -28,9 +49,17 @@ export default function WeatherDisplay() {
 
         setHistory(tab => [{ id, temp, desc, city, iconLink, flagLink }, ...tab]);
     };
+
+    const handleLocation = (temp, desc, name) => {
+        setOwnCity({ temp, desc, name });
+    };
     
     return (
         <div className="weather-container">
+            <div>
+                <WeatherRequester lat={location.latitude} lon={location.longitude} setOwnData={handleLocation}/>
+                {ownCity.name && <p>{ownCity.name}, il fait actuellement {ownCity.temp}° chez vous</p>}
+            </div>
             <SearchBar setResponse={setResponse} setLoading={setLoading} setError={setError}/>
             {isLoading ? <p>Chargement</p> : 
              onError ? <p>Erreur</p> : 
