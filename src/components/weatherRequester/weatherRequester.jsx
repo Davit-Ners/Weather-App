@@ -1,25 +1,26 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function CityRequester({ city, getLatLon = (lat, lon) => {}, setError = () => {} }) {
+export default function WeatherRequester({ lat, lon, getLatLon = (lat, lon) => {}, setError = () => {} }) {
     const API_KEY = '8a65652400c8de0cba8e6afc7f6d2d3b';
-    
+    const LINK = 'https://api.openweathermap.org/data/2.5/weather';
+
     useEffect(() => {
-        if (!city) return;
+        if (!lat || !lon) return;
         let ignore = false;
 
         (async () => {
             try {
-                const response = await axios.get('http://api.openweathermap.org/geo/1.0/direct', {
+                const response = await axios.get(LINK, {
                     params: {
-                        q: city,
+                        lat: lat,
+                        lon: lon,
                         appid: API_KEY
                     }
                 });
 
                 if (ignore) return;
-                
-                getLatLon(response.data[0].lat, response.data[0].lon);
+                console.log(response.data);
             } catch (e) {
                 if (ignore) return;
                 setError(true);
@@ -29,5 +30,5 @@ export default function CityRequester({ city, getLatLon = (lat, lon) => {}, setE
         return () => {
             ignore = true;
         }
-    }, [city]);
+    }, [lat, lon]);
 };
