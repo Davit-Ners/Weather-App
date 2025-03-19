@@ -35,7 +35,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
     };
 
     useEffect(() => {
-        if (cityName) {
+        if (cityName && temp) {
             setResponse(temp, desc, cityName);
         }
     }, [cityName, desc, temp]);
