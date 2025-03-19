@@ -47,7 +47,6 @@ export default function WeatherDisplay() {
     };
 
     const onFavoritClick = () => {
-        console.log(codeLink);
         setLastId(id => id + 1);
         setHistory(tab => [{ id: lastId + 1, temp, desc, city, iconLink, codeLink }, ...tab]);
     }
