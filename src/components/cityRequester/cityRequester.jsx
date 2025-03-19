@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function CityRequester({ city, getLatLonCity = () => {}, setError = () => {}, setLoading = () => {} }) {
+export default function CityRequester({ city, getLatLonCityCode = () => {}, setError = () => {}, setLoading = () => {} }) {
     const API_KEY = '8a65652400c8de0cba8e6afc7f6d2d3b';
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function CityRequester({ city, getLatLonCity = () => {}, setError
 
                 setLoading(false);
                 
-                getLatLonCity(response.data[0].lat, response.data[0].lon, response.data[0].local_names.fr || response.data[0].local_names.en);
+                getLatLonCityCode(response.data[0].lat, response.data[0].lon, response.data[0].local_names.fr || response.data[0].local_names.en, response.data[0].country);
             } catch (e) {
                 if (ignore) return;
                 setLoading(false);

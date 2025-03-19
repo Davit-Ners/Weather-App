@@ -9,14 +9,16 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
     const [ city, setCity ] = useState('');
     const [ lat, setLat ] = useState('');
     const [ lon, setLon ] = useState('');
+    const [ code, setCode ] = useState('');
     const [ temp, setTemp ] = useState('');
     const [ desc, setDesc ] = useState('');
     const [ cityName, setCityName ] = useState('');
     const [ iconLink, setIconLink ] = useState('');
 
-    const getLatLonCity = (lat, lon, city) => {
+    const getLatLonCityCode = (lat, lon, city, code) => {
         setLat(lat);
         setLon(lon);
+        setCode(code);
         setCityName(city);
     };
 
@@ -39,7 +41,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
 
     useEffect(() => {
         if (cityName && temp) {
-            setResponse(temp, desc, cityName, iconLink);
+            setResponse(temp, desc, cityName, iconLink, code);
         }
     }, [cityName, desc, temp]);
     
@@ -48,7 +50,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
             <label htmlFor="city">Rechercher une ville :</label>
             <input type="text" id="city" placeholder="Bruxelles..." value={city} onChange={(e) => setCity(e.target.value)}/>
             <button onClick={handleSearch}>Rechercher</button>
-            <CityRequester city={search} getLatLonCity={getLatLonCity} setError={setError} setLoading={setLoading}/>
+            <CityRequester city={search} getLatLonCityCode={getLatLonCityCode} setError={setError} setLoading={setLoading}/>
             <WeatherRequester lat={lat} lon={lon} setError={setError} setData={setData} setLoading={setLoading}/>
         </div>
     );
