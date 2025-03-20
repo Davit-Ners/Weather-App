@@ -3,6 +3,7 @@ import SearchBar from "../searchBar/searchBar.jsx";
 import History from "../history/history.jsx";
 import style from './weather.module.css';
 import WeatherRequester from "../weatherRequester/weatherRequester.jsx";
+import Loader from "../loader/loader.jsx";
 
 export default function WeatherDisplay() {
 
@@ -61,8 +62,8 @@ export default function WeatherDisplay() {
                 <WeatherRequester lat={location.latitude} lon={location.longitude} setOwnData={handleLocation}/>
                 {ownCity.name && <p>{ownCity.name}, il fait actuellement {ownCity.temp}° chez vous</p>}
             </div>
-            <SearchBar setResponse={setResponse} setLoading={setLoading} setError={setError}/>
-            {isLoading ? <p>Chargement</p> : 
+            <SearchBar setResponse={setResponse} setLoading={setLoading} setError={setError} isLoading={isLoading}/>
+            {isLoading ? <Loader /> : 
              onError ? <p>Erreur</p> : 
              city && 
              <div className={style['response']}>

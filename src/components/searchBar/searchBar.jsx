@@ -3,7 +3,7 @@ import CityRequester from "../cityRequester/cityRequester.jsx";
 import WeatherRequester from "../weatherRequester/weatherRequester.jsx";
 import style from './search-bar.module.css';
 
-export default function SearchBar({ setResponse = () => {}, setLoading = () => {}, setError = () => {} }) {
+export default function SearchBar({ setResponse = () => {}, setLoading = () => {}, setError = () => {}, isLoading }) {
 
     const [ search, setSearch ] = useState('');
     const [ city, setCity ] = useState('');
@@ -50,7 +50,7 @@ export default function SearchBar({ setResponse = () => {}, setLoading = () => {
         <div className={style['search-bar']}>
             <label htmlFor="city">Rechercher une ville :</label>
             <input type="text" id="city" placeholder="Bruxelles..." value={city} onChange={(e) => setCity(e.target.value)}/>
-            <button onClick={handleSearch}>Rechercher</button>
+            <button disabled={isLoading} onClick={handleSearch}>Rechercher</button>
             <CityRequester city={search} getLatLonCityCode={getLatLonCityCode} setError={setError} setLoading={setLoading}/>
             <WeatherRequester lat={lat} lon={lon} setError={setError} setData={setData} setLoading={setLoading}/>
         </div>
